@@ -62,9 +62,6 @@ def install_robot(current_os):
     install_setup = 'jython setup.py install'
     os.system(install_setup)
 
-
-
-   
 ## Cucumber instalation 
 def install_cucumber_on_mac():
     install_cucumber = 'sudo gem install cucumber'
@@ -97,15 +94,13 @@ def arg_parser():
     arg_parser.add_argument('-r', '--robot',
             action='store_true',
             help ='Run script withouth specific tag name.')
-    arg_parser.add_argument('-j', '--jython',
-            action='store_true',
-            help='Run script withouth specific tag name.')
     arg_parser.add_argument('-c', '--cucumber',
             action='store_true',
             help='Run script withouth specific tag name.')
     args=arg_parser.parse_args()
     return args
 
+# Opened install directory
 def open_install_directory():
     install_directory = 'install_automation'
     parent_directory = os.getcwd()
@@ -114,23 +109,19 @@ def open_install_directory():
     go_install_dir = parent_directory+'/'+install_directory+''
     os.chdir(go_install_dir)
 
-
+#Run Script
 def run():
     current_os = determination_of_operating_systems()
     args = arg_parser()
     open_install_directory()
     print "Running on " + current_os
     if args.robot:
-        print "Intsalling Robot in current OS ..."
+        print "Intsalling Robot an Jython in current OS ..."
         install_jython(current_os)
         install_robot(current_os)
     if args.cucumber:
         print "Intsalling Cucumber in current OS ..."
         install_cucumber(current_os)
-    if args.jython:
-        print "Intsalling Jython in current OS ..."
-        install_jython(current_os)
-
 
 if __name__ == '__main__':
     run()
